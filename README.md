@@ -99,4 +99,4 @@ For usage examples please refer to the [Live Documentation](https://projektygrup
 * JoinIt website: https://joinitui.azurewebsites.net/ - not working yet
 
 ## Backend
-* Github: https://github.com/ProjektyGrupowe/JoinIt-API
+* Github: https://github.com/ProjektyGrupowe/JointIt-API
