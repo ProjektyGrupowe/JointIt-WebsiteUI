@@ -14,4 +14,20 @@ export class MailService {
     return this.http.post(`${API_URL}/email/send?to=${companyEmail}&appliedEmail=${appliedEmail}&firsAndLastName=${firstAndLastName}&introduction=${introduction}&companyName=${companyName}
     &localization=${localization}&positionName=${positionName}`, pdf);
   }
+
+  uploadPdfToDatabase(pdf: any, pdfName: string, companyEmail: string, nameSurname: string){
+    return this.http.post(`${API_URL}/managepdf/uploadPdf?pdfName=${pdfName}&companyEmail=${companyEmail}&nameSurname=${nameSurname}`, pdf);
+  }
+
+  getQueueMessage(){
+    return this.http.get(`${API_URL}/email/getMessage`)
+  }
+
+  addQueueComment(companyName: any, comment: any){
+    return this.http.post(`${API_URL}/managequeues/addMessage?companyName=${companyName}&comment=${comment}`, null)
+  }
+
+  getQueueComment(companyName){
+    return this.http.get(`${API_URL}/managequeues/getQueueComment?companyName=${companyName}`)
+  }
 }

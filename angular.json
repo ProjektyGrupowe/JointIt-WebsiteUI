@@ -115,7 +115,9 @@
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              "./node_modules/file-saver/src/FileSaver.js"
+            ]
           }
         },
         "lint": {

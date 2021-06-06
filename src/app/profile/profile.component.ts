@@ -7,6 +7,7 @@ import { first } from 'rxjs/operators';
 import { AUTHENTICATED_USER } from '../app.constants';
 import { Company } from '../common/company';
 import { BasicAuthenticationService } from '../service/basic-authentication.service';
+import { MailService } from '../service/mail.service';
 import { PostingService } from '../service/posting.service';
 import { UserService } from '../service/user.service';
 
@@ -31,6 +32,7 @@ export class ProfileComponent implements OnInit {
   phoneNumber: number;
   password: string;
   pic: any;
+  comment: string = "Click next to display comment";
 
   updateForm: FormGroup;
 
@@ -40,7 +42,8 @@ export class ProfileComponent implements OnInit {
     private spinner: NgxSpinnerService,
     private formBuilder: FormBuilder,
     private router: Router,
-    private toastr: ToastrService) {
+    private toastr: ToastrService,
+    private mailService: MailService) {
   }
 
   ngOnInit(): void {
@@ -63,6 +66,22 @@ export class ProfileComponent implements OnInit {
       phoneNumber: ['', Validators.required],
       password: ['', Validators.required, Validators.minLength(6)]
     });
+  }
+
+  viewComment(){
+    this.mailService.getQueueComment(this.name).subscribe(
+      data => {
+      },
+      error => {
+        if(error.status == 200){
+          this.comment = error.error.text
+        }
+
+        if(error.status == 500){
+          this.comment = "No more comments to display"
+        }
+      }
+    )
   }
 
   updateUser() {

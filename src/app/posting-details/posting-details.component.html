@@ -18,6 +18,31 @@
                     <li class="list-group-item">Full Time<i class="fas fa-clock fa-fw text-gray-400"></i></li>
                     <li class="list-group-item">{{ posting.postingCategory }}<i
                             class="fas fa-code fa-fw text-gray-400"></i></li>
+                    <li class="list-group-item">
+                        <button class="btn btn-outline-primary rounded-0" data-toggle="modal" data-target="#exampleModalCenter">Leave us a comment</button>
+                        <!-- Modal -->
+                        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalCenterTitle">Leave us a comment</h5>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form [formGroup]="commentForm" (ngSubmit)="addComment()">
+                                            <div class="form-group">
+                                                <label for="exampleFormControlInput1">Your Comment</label>
+                                                <textarea class="form-control" type="text"  [(ngModel)]='comment' [ngModelOptions]="{standalone: true}" required></textarea>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button class="btn btn-secondary" type="button" id="closeButton" data-dismiss="modal">Close</button>
+                                                <button class="btn btn-primary" type="submit">Send</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>                        
+                    </li>
                 </ul>
             </div>
             <div class="col-lg-8">
@@ -58,9 +83,11 @@
                                     </mat-form-field>
                                 </div>
                             </div>
+                            <input type="checkbox" [checked]="savePdf" (change)="savePdf = !savePdf"/>
+                            <label style="margin-left: 10px;" for="exampleFormControlInput1">I agree to save my CV in our database for purpose of future recruitment processes</label>
                         </form>
                     </div>
-                    <button class="btn btn-primary rounded-0 font-weight-500" style="width: 100%;"
+                    <button id="applyButton" class="btn btn-primary rounded-0 font-weight-500" style="width: 100%;"
                         (click)="sendEmail()">Apply Now</button>
                     <br>
                 </div>

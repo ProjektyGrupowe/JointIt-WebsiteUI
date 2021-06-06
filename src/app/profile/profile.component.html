@@ -32,7 +32,39 @@
                             for="file"></label>Click to
                         choose a file</button>
                 </div>
+
             </div>
+            <br>
+            <div class="card">
+                <div class="card-header">View Comments</div>
+                <div class="card-body text-center">
+                    <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter" id="comments">Browse Comments</button>
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalCenterTitle">Comments about your company</h5>
+                                </div>
+                                <div class="modal-body">
+                                    <form>
+                                        <div class="form-group">
+                                            <label for="exampleFormControlInput1">Current Comment</label>
+                                            <textarea class="form-control" type="text"  [(ngModel)]='comment' [ngModelOptions]="{standalone: true}" required disabled></textarea>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button class="btn btn-secondary" type="button" id="closeButton" data-dismiss="modal">Close</button>
+                                            <button class="btn btn-primary" type="button" (click)="viewComment()">Next</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+
         </div>
         <div class="col-xl-8">
             <!-- Account details card-->

@@ -27,6 +27,7 @@
     "@ng-bootstrap/ng-bootstrap": "^8.0.0",
     "angular-feather": "^6.1.0",
     "core-js": "^3.8.1",
+    "file-saver": "^2.0.5",
     "font-awesome": "^4.7.0",
     "jquery": "^3.5.1",
     "ng-multiselect-dropdown": "^0.2.14",

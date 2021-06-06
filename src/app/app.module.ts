@@ -28,6 +28,7 @@ import { PostingEditComponent } from './posting-edit/posting-edit.component';
 import { MaterialFileInputModule } from 'ngx-material-file-input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { ApplicantsListComponent } from './applicants-list/applicants-list.component';
 
 
 @NgModule({
@@ -45,7 +46,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     FormComponent,
     NotFoundComponent,
     MyPostingsComponent,
-    PostingEditComponent
+    PostingEditComponent,
+    ApplicantsListComponent,
   ],
   imports: [
     BrowserModule,
@@ -61,7 +63,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     HttpClientModule,
     ToastrModule.forRoot(),
     NgMultiSelectDropDownModule.forRoot(),
-    NgxSpinnerModule,
+    NgxSpinnerModule
   ],
   exports: [
     FeatherModule

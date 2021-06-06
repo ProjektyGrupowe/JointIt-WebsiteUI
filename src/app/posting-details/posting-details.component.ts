@@ -19,6 +19,9 @@ export class PostingDetailsComponent implements OnInit {
   fileToUpload: File;
   loading = false;
   submitted = false;
+  savePdf = false;
+  comment: string;
+  commentForm: FormGroup;
 
 
 
@@ -41,6 +44,46 @@ export class PostingDetailsComponent implements OnInit {
       introduction: ['', Validators.required],
       pdfFile: ['', Validators.required]
     });
+
+    this.commentForm = this.formBuilder.group({
+      comment: ['', Validators.required] 
+    })
+  }
+
+  addComment(){
+
+    this.spinner.show()
+
+    this.commentForm = this.formBuilder.group({
+      comment: [this.comment, Validators.required],
+      companyName: [this.posting.companyName, Validators.required]
+    })
+
+    if(this.commentForm.invalid){
+      this.toastr.error('Form is invalid!');
+      this.spinner.hide();
+    }
+
+
+    this.mailService.addQueueComment(this.posting.companyName, this.g.comment.value).pipe(first()).subscribe(
+      data => {
+        this.toastr.success('Comment added successfully')
+        this.spinner.hide()
+        let closeButton = document.getElementById('closeButton');
+        closeButton.click();
+      },
+      error => {
+        if(error.status == 200){
+          this.toastr.success('Comment added successfully')
+          this.spinner.hide()
+          let closeButton = document.getElementById('closeButton');
+          closeButton.click();
+        } else {
+          this.toastr.error(error);
+          this.spinner.hide()
+        }
+      }
+    )
   }
 
   getValues() {
@@ -73,6 +116,7 @@ export class PostingDetailsComponent implements OnInit {
 
 
   get f() { return this.applyForm.controls; }
+  get g() { return this.commentForm.controls}
 
 
   public onFileChanged(event) {
@@ -80,8 +124,13 @@ export class PostingDetailsComponent implements OnInit {
   }
 
   sendEmail() {
-    this.spinner.show();
     this.submitted = true;
+
+    this.toastr.warning('Sending Application...', "Sending Application" ,{
+      timeOut: 15500,
+      progressBar: true,
+      progressAnimation: 'increasing'
+    });
 
     const formData: FormData = new FormData();
     formData.append('pdfFile', this.fileToUpload, this.fileToUpload.name);
@@ -98,15 +147,52 @@ export class PostingDetailsComponent implements OnInit {
         .pipe(first())
         .subscribe(
           data => {
-            this.toastr.success('Success!');
-            this.spinner.hide();
-            setTimeout(() => {
-              this.router.navigate(['/board']);
-            }, 1000)
+
+            if(this.savePdf){
+              this.mailService.uploadPdfToDatabase(formData, this.f.email.value, this.posting.email, this.f.firstAndLastName.value).pipe(first()).subscribe(
+                pdfData => {
+                  this.toastr.success('Success!');
+                  setTimeout(() => {
+                    this.router.navigate(['/board']);
+                  }, 1000)
+                },
+                error => {
+                  if(error.status == 200){
+                    this.mailService.getQueueMessage().subscribe(
+                      messageData => {
+                        console.log("DUPA")
+                        console.log(messageData);
+                        this.toastr.success('Success!');
+                        setTimeout(() => {
+                          this.router.navigate(['/board']);
+                        }, 1000)
+                      },
+                      error =>{
+                        if(error.status == 200){
+                          console.log(error.error.text);
+                          this.toastr.success('Application sent!');
+                          setTimeout(() => {
+                            this.router.navigate(['/board']);
+                          }, 1500)
+                        }else{
+                          this.toastr.error(error);
+                        }
+                      }
+                    )
+                  }else{
+                    this.toastr.error(error);
+                  }
+                }
+              )
+            } else {
+              this.toastr.success('Success!');
+              setTimeout(() => {
+                this.router.navigate(['/board']);
+              }, 1000)
+            }
           },
           error => {
             this.toastr.error(error);
-            this.spinner.hide();
           });
     }
   }

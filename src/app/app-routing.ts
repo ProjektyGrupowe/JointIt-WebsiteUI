@@ -10,6 +10,7 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import { RouteGuardService } from './service/route-guard.service'
 import { MyPostingsComponent } from './my-postings/my-postings.component';
 import { PostingEditComponent } from './posting-edit/posting-edit.component';
+import { ApplicantsListComponent } from './applicants-list/applicants-list.component';
 
 
 const routes: Routes = [
@@ -41,6 +42,11 @@ const routes: Routes = [
   {
     path: "profile",
     component: ProfileComponent,
+    canActivate: [RouteGuardService]
+  },
+  {
+    path: "applicants",
+    component: ApplicantsListComponent,
     canActivate: [RouteGuardService]
   },
   {

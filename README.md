@@ -88,7 +88,7 @@ To get a local copy up and running follow these simple steps:
 #### For Local
 1. Clone the repo
 ```sh
-git clone https://github.com/ProjektyGrupowe/JointIt-WebsiteUI.git
+git clone https://github.com/ProjektyGrupowe/JoinIT-UI.git
 ```
 
 <!-- USAGE EXAMPLES -->
@@ -96,7 +96,7 @@ git clone https://github.com/ProjektyGrupowe/JointIt-WebsiteUI.git
 For usage examples please refer to the [Live Documentation](https://projektygrupowe.github.io/overview.html)
 
 ## WWW
-* JoinIt website: https://joinitui.azurewebsites.net/ - not working yet
+* JoinIt website: https://joinitui.azurewebsites.net/
 
 ## Backend
-* Github: https://github.com/ProjektyGrupowe/JointIt-API
+* Github: https://github.com/ProjektyGrupowe/JoinItAPI
